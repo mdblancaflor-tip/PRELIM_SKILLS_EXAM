@@ -1,0 +1,17 @@
+import json
+import csv
+from os import write
+
+with open("/home/devasc/Downloads/covid_cases.json", 'r') as covid_json:
+    data = json.loads(covid_json.read())
+
+with open('/home/devasc/Downloads/covidJSON_parsed.csv', 'w', newline='') as covid_json_parsed:
+    csvFile=csv.writer(covid_json_parsed)
+    csvFile.writerow(['dateRep','countriesAndTerritories','cases','deaths'])
+    for i in data["records"]:
+        csvFile.writerow([
+                i["dateRep"],
+                i["countriesAndTerritories"],
+                i["cases"],
+                i["deaths"]])
+print(data)
